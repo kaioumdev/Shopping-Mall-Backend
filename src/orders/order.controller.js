@@ -88,3 +88,15 @@ const getOrdersByEmail = async (req, res) => {
   }
 }
 
+const getOrdersByOrderId = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if(!order) {
+      return errorResponse(res, 404, "Order not found")
+    }
+    return successResponse(res, 200, "Order fetched successfully", order)
+  } catch (error) {
+    return errorResponse(res, 500, "Failed to get order", error)
+  }
+}
+
