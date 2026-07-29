@@ -101,3 +101,28 @@ const updateProductById  = async (req, res) => {
         return errorResponse(res, 500, "Failed to update", error)
      }
 }
+
+const deleteProductById =  async (req, res) => {
+    const productId = req.params.id;
+    try {
+        const deletedProduct = await Products.findByIdAndDelete(productId);
+
+        if(!deletedProduct) {
+            return errorResponse(res, 404, "Product not found")
+        }
+        await Reviews.deleteMany({productId: productId});
+        return successResponse(res, 200, "Product deleted successfully")
+
+    } catch (error) {
+        return errorResponse(res, 500, "Failed to delete", error)
+    }
+}
+
+
+module.exports = {
+    createNewProduct,
+    getAllProducts,
+    getSingleProduct,
+    updateProductById,
+    deleteProductById
+}
