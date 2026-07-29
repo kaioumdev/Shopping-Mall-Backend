@@ -70,3 +70,21 @@ const confirmPayment = async (req, res) => {
   }
 }
 
+const getOrdersByEmail = async (req, res) => {
+  const email = req.params.email;
+  console.log("Fetching orders by email", {email});
+  try {
+    if(!email) {
+      return errorResponse(res, 400, "Email is required")
+    }
+    const orders = await Order.find({email}).sort({createdAt: - 1})
+    console.log("Orders fetched by email", orders)
+    if(orders.length === 0 || !orders) {
+      return errorResponse(res, 404, "No orders found for this email")
+    }
+    return successResponse(res, 200, "Orders fetched successfully", orders)
+  } catch (error) {
+    return errorResponse(res, 500, "Failed to get orders", error)
+  }
+}
+
