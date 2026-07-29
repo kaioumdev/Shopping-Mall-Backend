@@ -100,3 +100,17 @@ const getOrdersByOrderId = async (req, res) => {
   }
 }
 
+const getAllOrders = async (req, res) => {
+  console.log("Fetching all orders", req);
+  try {
+    const orders =  await Order.find().sort({createdAt: -1});
+    if(orders.length === 0 || !orders) {
+      return errorResponse(res, 404, "No orders found")
+    }
+    return successResponse(res, 200, "Orders fetched successfully", orders)
+  } catch (error) {
+    return errorResponse(res, 500, "Failed to get all orders", error)
+  }
+}
+
+
