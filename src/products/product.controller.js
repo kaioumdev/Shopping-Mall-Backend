@@ -83,3 +83,21 @@ const getSingleProduct = async (req, res) => {
         return errorResponse(res, 500, "Failed to get single product", error)
     }
 };
+
+const updateProductById  = async (req, res) => {
+    const productId =  req.params.id;
+     try {
+        const updatedProduct =  await Products.findByIdAndUpdate(productId, {...req.body}, {
+            new: true
+        })
+
+        if(!updatedProduct) {
+            return errorResponse(res, 404, "Product not found")
+        }
+
+        return successResponse(res, 200, "Product updated successfully", updatedProduct)
+
+      } catch (error) {
+        return errorResponse(res, 500, "Failed to update", error)
+     }
+}
