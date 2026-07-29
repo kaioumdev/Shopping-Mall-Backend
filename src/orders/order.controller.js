@@ -136,4 +136,25 @@ const updateOrderStatus = async (req, res) => {
   }
 }
 
+const deleteOrderById = async (req, res) => {
+  const {id} = req.params;
+  try {
+    const deletedOrder = await Order.findByIdAndDelete(id);
+    if(!deletedOrder) {
+      return errorResponse(res, 404, "Order not found")
+    }
+    return successResponse(res, 200, "Order deleted successfully", deletedOrder)
+  } catch (error) {
+    return errorResponse(res, 500, "Failed to delete order", error)
+  }
+}
 
+module.exports = {
+  makePaymentRequest,
+  confirmPayment,
+  getOrdersByEmail,
+  getOrdersByOrderId,
+  getAllOrders,
+  updateOrderStatus,
+  deleteOrderById
+};
