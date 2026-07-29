@@ -114,3 +114,26 @@ const getAllOrders = async (req, res) => {
 }
 
 
+const updateOrderStatus = async (req, res) => {
+  const {id} = req.params;
+  const {status} = req.body;
+  if(!status) {
+    return errorResponse(res, 400, "Status is required")
+  }
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(id, {status, updatedAt: Date.now()}, {
+      new: true,
+      runValidators: true,
+    })
+
+    if(!updatedOrder) {
+      return errorResponse(res, 404, "Order not found")
+    }
+
+    return successResponse(res, 200, "Order status updated successfully", updatedOrder)
+  } catch (error) {
+    return errorResponse(res, 500, "Failed to update order status", error)
+  }
+}
+
+
