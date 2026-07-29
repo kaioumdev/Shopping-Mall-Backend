@@ -46,3 +46,24 @@ const postAReview = async (req, res) => {
     }
 }
 
+const getUsersReview = async (req, res) => {
+    const {userId} = req.params;
+
+    try {
+        if (!userId) {
+            return errorResponse(res, 400, "Missing user ID")
+        }
+
+        const reviews = await Reviews.find({userId: userId}).sort({createdAt: -1})
+
+        if(reviews.length === 0) {
+            return errorResponse(res, 404, "No reviews found for this user")
+        }
+
+        return successResponse(res, 200, "Reviews fetched successfully", reviews)
+
+    } catch (error) {
+        return errorResponse(res, 500, "Failed to get users review", error)
+    }
+}
+
