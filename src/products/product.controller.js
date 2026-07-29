@@ -64,3 +64,22 @@ onst getAllProducts = async (req, res) => {
         return errorResponse(res, 500, "Failed to get all products", error)
     }
 }
+
+const getSingleProduct = async (req, res) => {
+    const {id} = req.params;
+    try {
+        const product  = await Products.findById(id).populate('author', 'username email');
+
+        if(!product) {
+            return errorResponse(res, 404, "Product not found")
+        }
+        const reviews=  await Reviews.find({productId: id}).populate('userId', 'username email')
+
+        return successResponse(res, 200, "Single Product and reviews ",{product, reviews})
+
+
+
+    } catch (error) {
+        return errorResponse(res, 500, "Failed to get single product", error)
+    }
+};
