@@ -67,3 +67,17 @@ const getUsersReview = async (req, res) => {
     }
 }
 
+const getTotalReviewsCount =  async (req, res) => {
+    try {
+        const totalReviews = await Reviews.countDocuments({});
+        return successResponse(res, 200, "Total reviews fetched successfully", totalReviews)
+    } catch (error) {
+        return errorResponse(res, 500, "Failed to get users review", error)
+    }
+}
+
+module.exports = {
+    postAReview,
+    getUsersReview,
+    getTotalReviewsCount
+}
