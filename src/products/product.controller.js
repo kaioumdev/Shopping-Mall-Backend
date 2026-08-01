@@ -26,7 +26,7 @@ const createNewProduct = async (req, res) => {
     }
 }
 
-onst getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
 
     try {
         const {category, color, minPrice, maxPrice, page=1, limit=10} = req.query;
@@ -83,6 +83,7 @@ const getSingleProduct = async (req, res) => {
         return errorResponse(res, 500, "Failed to get single product", error)
     }
 };
+
 
 const updateProductById  = async (req, res) => {
     const productId =  req.params.id;
