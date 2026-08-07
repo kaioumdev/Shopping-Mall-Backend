@@ -28,7 +28,7 @@ Most write operations and all admin endpoints require a valid **JWT token** stor
 
 ### 📦 Base URL
 - **Local development:** \`http://localhost:5000\`
-- **Production:** \`https://final-libaba-client.vercel.app\` *(backend domain)*
+- **Production:** \`https://shopping-mall-backend.vercel.app\` *(backend domain)*
 
 ---
 
@@ -88,7 +88,7 @@ Error responses follow the same structure with \`"success": false\`.
                 description: 'Local Development Server',
             },
             {
-                url: 'https://final-libaba-client.vercel.app',
+                url: 'https://shopping-mall-backend.vercel.app',
                 description: 'Production Server',
             },
         ],
