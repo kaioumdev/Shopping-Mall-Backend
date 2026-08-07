@@ -24,12 +24,14 @@ const productsRoutes = require('./src/products/product.route')
 const reviewsRoutes = require('./src/reviews/review.route')
 const ordersRoutes = require("./src/orders/order.route");
 const statsRoutes = require("./src/stats/stats.route")
+const contactRoutes = require("./src/contact/contact.route")
 
 app.use('/api/auth', userRoutes)
 app.use("/api/products", productsRoutes)
 app.use("/api/reviews", reviewsRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/contact", contactRoutes);
 
 
 async function main() {
