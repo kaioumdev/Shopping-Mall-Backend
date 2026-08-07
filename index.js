@@ -62,6 +62,12 @@ app.get('/api-docs.json', (req, res) => {
   res.send(swaggerSpec);
 });
 
+app.get("/", (req, res) => {
+  res.status(200).send(
+    "ShoppingMall E-commerce Backend Server is running successfully! 🚀"
+  );
+});
+
 const UploadImage = require("./src/utilis/UploadImage")
 
 // routes
@@ -81,16 +87,16 @@ app.use("/api/contact", contactRoutes);
 
 
 async function main() {
+  try {
     await mongoose.connect(process.env.UB_URL);
-    console.log("mongodbAtlas", process.env.UB_URL);
- 
-    app.get('/', (req, res) => {
-      res.send('ShoppingMall E-commerce Server is running!')
-    })
+
+    console.log("MongoDB connected successfully!");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error);
+  }
 }
 
-
-main().then(() => console.log("Mongodb connected successfuly!")).catch(err => console.log(err));
+main();
 
 
 // upload image api
