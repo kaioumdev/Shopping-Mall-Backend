@@ -4,12 +4,12 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Lebaba Shopping Mall API',
+            title: 'ShoppingMall Shopping Mall API',
             version: '1.0.0',
             description: `
-## Welcome to the Lebaba Shopping Mall REST API
+## Welcome to the ShoppingMall Shopping Mall REST API
 
-This is the complete API documentation for the **Lebaba E-Commerce Shopping Mall** backend.  
+This is the complete API documentation for the **ShoppingMall E-Commerce Shopping Mall** backend.  
 Built with **Node.js**, **Express**, **MongoDB (Mongoose)**, and **Stripe** for payments.
 
 ---
@@ -75,8 +75,8 @@ All endpoints return a consistent JSON envelope:
 Error responses follow the same structure with \`"success": false\`.
             `,
             contact: {
-                name: 'Lebaba API Support',
-                email: 'support@lebaba.com',
+                name: 'ShoppingMall API Support',
+                email: 'support@ShoppingMall.com',
             },
             license: {
                 name: 'MIT',

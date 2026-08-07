@@ -20,12 +20,12 @@ app.use(bodyParser.json({ limit: '10mb' }))
 
 // ── Swagger UI ────────────────────────────────────────────────────────────────
 const swaggerUiOptions = {
-  customSiteTitle: 'Lebaba API Docs',
+  customSiteTitle: 'ShoppingMall API Docs',
   customCss: `
     .swagger-ui .topbar { background: #111111; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .swagger-ui .topbar-wrapper img { display: none; }
     .swagger-ui .topbar-wrapper::before {
-      content: 'Lebaba Shopping Mall API';
+      content: 'ShoppingMall Shopping Mall API';
       color: #ffffff;
       font-size: 1.4rem;
       font-weight: 800;
@@ -85,7 +85,7 @@ async function main() {
     console.log("mongodbAtlas", process.env.UB_URL);
  
     app.get('/', (req, res) => {
-      res.send('Lebaba E-commerce Server is running!')
+      res.send('ShoppingMall E-commerce Server is running!')
     })
 }
 
