@@ -12,7 +12,7 @@ const swaggerSpec = require('./src/config/swagger');
 // middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://final-libaba-client.vercel.app'],
+  origin: ['http://localhost:5173', 'http://localhost:5174'],
   credentials: true
 }))
 app.use(cookieParser())
