@@ -677,24 +677,37 @@ function buildSwaggerHtml(specUrl) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ShoppingMall API Docs</title>
   <link rel="stylesheet" href="${CDN_BASE}/swagger-ui.css" />
-  <style>
+//   <style>
+//     * { box-sizing: border-box; margin: 0; padding: 0; }
+//     body { background: #0d0d0d; }
+//     .swagger-ui .topbar { background: #111111; border-bottom: 1px solid rgba(255,255,255,0.05); }
+//     .swagger-ui .topbar-wrapper img { display: none; }
+//     .swagger-ui .topbar-wrapper::before {
+//       content: 'ShoppingMall Shopping Mall API';
+//       color: #ffffff;
+//       font-size: 1.4rem;
+//       font-weight: 800;
+//       font-family: serif;
+//     }
+//     .swagger-ui .info .title { color: #ffffff; font-size: 2rem; }
+//     .swagger-ui .info p, .swagger-ui .info li, .swagger-ui .info table { color: #aaaaaa; }
+//     .swagger-ui .scheme-container { background: #111111; box-shadow: none; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; }
+//     .swagger-ui .opblock-tag { color: #ffffff; border-color: rgba(255,255,255,0.08); }
+//     .swagger-ui .opblock { border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.06); }
+//     .swagger-ui select, .swagger-ui input[type=text], .swagger-ui textarea { background: #1a1a1a; color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; }
+//   </style>
+<style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0d0d0d; }
-    .swagger-ui .topbar { background: #111111; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .swagger-ui .topbar-wrapper img { display: none; }
-    .swagger-ui .topbar-wrapper::before {
-      content: 'ShoppingMall Shopping Mall API';
-      color: #ffffff;
-      font-size: 1.4rem;
-      font-weight: 800;
-      font-family: serif;
-    }
-    .swagger-ui .info .title { color: #ffffff; font-size: 2rem; }
-    .swagger-ui .info p, .swagger-ui .info li, .swagger-ui .info table { color: #aaaaaa; }
-    .swagger-ui .scheme-container { background: #111111; box-shadow: none; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; }
-    .swagger-ui .opblock-tag { color: #ffffff; border-color: rgba(255,255,255,0.08); }
-    .swagger-ui .opblock { border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.06); }
-    .swagger-ui select, .swagger-ui input[type=text], .swagger-ui textarea { background: #1a1a1a; color: #fff; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; }
+    body { background: #fafafa; }
+    html { overflow-y: scroll; }
+    .swagger-ui .topbar { background-color: #1e293b !important; }
+    .swagger-ui .info .title { color: #1e293b; font-size: 2rem; }
+    .swagger-ui .scheme-container { background: #f8fafc; padding: 12px 20px; }
+    .swagger-ui .opblock.opblock-get    .opblock-summary-method { background: #3b82f6; }
+    .swagger-ui .opblock.opblock-post   .opblock-summary-method { background: #22c55e; }
+    .swagger-ui .opblock.opblock-put    .opblock-summary-method { background: #f59e0b; }
+    .swagger-ui .opblock.opblock-delete .opblock-summary-method { background: #ef4444; }
+    .swagger-ui .topbar .download-url-wrapper { display: none; }
   </style>
 </head>
 <body>
