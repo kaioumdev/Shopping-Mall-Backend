@@ -343,7 +343,7 @@ const options = {
         info: {
             title: 'ShoppingMall Shopping Mall API',
             version: '1.0.0',
-                        description: `
+            description: `
 ## Welcome to the ShoppingMall Shopping Mall REST API
 
 This is the complete API documentation for the **ShoppingMall E-Commerce Shopping Mall** backend.  
@@ -424,13 +424,13 @@ Error responses follow the same structure with \`"success": false\`.
             { url: 'https://shopping-mall-backend.vercel.app', description: 'Production Server' },
         ],
         tags: [
-            { name: 'Auth',     description: 'User registration, login, logout, and profile management' },
+            { name: 'Auth', description: 'User registration, login, logout, and profile management' },
             { name: 'Products', description: 'Browse, create, update, and delete products' },
-            { name: 'Orders',   description: 'Stripe checkout, payment confirmation, and order management' },
-            { name: 'Reviews',  description: 'Post and retrieve product reviews' },
-            { name: 'Stats',    description: 'User and admin analytics dashboards' },
-            { name: 'Contact',  description: 'Contact form submissions and admin message management' },
-            { name: 'Upload',   description: 'Image upload to Cloudinary' },
+            { name: 'Orders', description: 'Stripe checkout, payment confirmation, and order management' },
+            { name: 'Reviews', description: 'Post and retrieve product reviews' },
+            { name: 'Stats', description: 'User and admin analytics dashboards' },
+            { name: 'Contact', description: 'Contact form submissions and admin message management' },
+            { name: 'Upload', description: 'Image upload to Cloudinary' },
         ],
         components: {
             securitySchemes: {
@@ -448,7 +448,7 @@ Error responses follow the same structure with \`"success": false\`.
                     required: ['username', 'email', 'password'],
                     properties: {
                         username: { type: 'string', example: 'john_doe' },
-                        email:    { type: 'string', format: 'email', example: 'john@example.com' },
+                        email: { type: 'string', format: 'email', example: 'john@example.com' },
                         password: { type: 'string', format: 'password', minLength: 6, example: 'secret123' },
                     },
                 },
@@ -456,29 +456,29 @@ Error responses follow the same structure with \`"success": false\`.
                     type: 'object',
                     required: ['email', 'password'],
                     properties: {
-                        email:    { type: 'string', format: 'email', example: 'john@example.com' },
+                        email: { type: 'string', format: 'email', example: 'john@example.com' },
                         password: { type: 'string', format: 'password', example: 'secret123' },
                     },
                 },
                 UserPublic: {
                     type: 'object',
                     properties: {
-                        _id:          { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
-                        username:     { type: 'string', example: 'john_doe' },
-                        email:        { type: 'string', example: 'john@example.com' },
-                        role:         { type: 'string', enum: ['user', 'admin'], example: 'user' },
+                        _id: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
+                        username: { type: 'string', example: 'john_doe' },
+                        email: { type: 'string', example: 'john@example.com' },
+                        role: { type: 'string', enum: ['user', 'admin'], example: 'user' },
                         profileImage: { type: 'string', example: 'https://res.cloudinary.com/...' },
-                        bio:          { type: 'string', example: 'Fashion lover from London' },
-                        profession:   { type: 'string', example: 'Designer' },
+                        bio: { type: 'string', example: 'Fashion lover from London' },
+                        profession: { type: 'string', example: 'Designer' },
                     },
                 },
                 EditProfileRequest: {
                     type: 'object',
                     properties: {
-                        username:     { type: 'string', example: 'john_updated' },
+                        username: { type: 'string', example: 'john_updated' },
                         profileImage: { type: 'string', example: 'https://res.cloudinary.com/...' },
-                        bio:          { type: 'string', maxLength: 200, example: 'Updated bio text' },
-                        profession:   { type: 'string', example: 'Software Engineer' },
+                        bio: { type: 'string', maxLength: 200, example: 'Updated bio text' },
+                        profession: { type: 'string', example: 'Software Engineer' },
                     },
                 },
                 UpdateRoleRequest: {
@@ -492,32 +492,32 @@ Error responses follow the same structure with \`"success": false\`.
                 Product: {
                     type: 'object',
                     properties: {
-                        _id:         { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d2' },
-                        name:        { type: 'string', example: 'Diamond Earrings' },
-                        category:    { type: 'string', enum: ['accessories', 'dress', 'jewellery', 'cosmetics'], example: 'jewellery' },
+                        _id: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d2' },
+                        name: { type: 'string', example: 'Diamond Earrings' },
+                        category: { type: 'string', enum: ['accessories', 'dress', 'jewellery', 'cosmetics'], example: 'jewellery' },
                         description: { type: 'string', example: 'Beautiful handcrafted diamond earrings' },
-                        price:       { type: 'number', example: 149.99 },
-                        oldPrice:    { type: 'number', example: 199.99 },
-                        image:       { type: 'string', example: 'https://res.cloudinary.com/...' },
-                        color:       { type: 'string', enum: ['black','red','gold','blue','silver','beige','green'], example: 'gold' },
-                        rating:      { type: 'number', minimum: 0, maximum: 5, example: 4.5 },
-                        author:      { $ref: '#/components/schemas/UserPublic' },
-                        createdAt:   { type: 'string', format: 'date-time' },
-                        updatedAt:   { type: 'string', format: 'date-time' },
+                        price: { type: 'number', example: 149.99 },
+                        oldPrice: { type: 'number', example: 199.99 },
+                        image: { type: 'string', example: 'https://res.cloudinary.com/...' },
+                        color: { type: 'string', enum: ['black', 'red', 'gold', 'blue', 'silver', 'beige', 'green'], example: 'gold' },
+                        rating: { type: 'number', minimum: 0, maximum: 5, example: 4.5 },
+                        author: { $ref: '#/components/schemas/UserPublic' },
+                        createdAt: { type: 'string', format: 'date-time' },
+                        updatedAt: { type: 'string', format: 'date-time' },
                     },
                 },
                 CreateProductRequest: {
                     type: 'object',
                     required: ['name', 'price', 'image'],
                     properties: {
-                        name:        { type: 'string', example: 'Silk Evening Dress' },
-                        category:    { type: 'string', enum: ['accessories', 'dress', 'jewellery', 'cosmetics'], example: 'dress' },
+                        name: { type: 'string', example: 'Silk Evening Dress' },
+                        category: { type: 'string', enum: ['accessories', 'dress', 'jewellery', 'cosmetics'], example: 'dress' },
                         description: { type: 'string', example: 'Elegant silk evening dress in midnight blue' },
-                        price:       { type: 'number', example: 89.99 },
-                        oldPrice:    { type: 'number', example: 120.00 },
-                        image:       { type: 'string', example: 'https://res.cloudinary.com/...' },
-                        color:       { type: 'string', example: 'blue' },
-                        author:      { type: 'string', description: 'MongoDB ObjectId of the admin user', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
+                        price: { type: 'number', example: 89.99 },
+                        oldPrice: { type: 'number', example: 120.00 },
+                        image: { type: 'string', example: 'https://res.cloudinary.com/...' },
+                        color: { type: 'string', example: 'blue' },
+                        author: { type: 'string', description: 'MongoDB ObjectId of the admin user', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
                     },
                 },
                 // ── ORDER ─────────────────────────────────────────────
@@ -525,18 +525,18 @@ Error responses follow the same structure with \`"success": false\`.
                     type: 'object',
                     properties: {
                         productId: { type: 'string', example: 'prod_xyz123' },
-                        quantity:  { type: 'integer', example: 2 },
+                        quantity: { type: 'integer', example: 2 },
                     },
                 },
                 Order: {
                     type: 'object',
                     properties: {
-                        _id:       { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d3' },
-                        orderId:   { type: 'string', description: 'Stripe PaymentIntent ID', example: 'pi_3abc123' },
-                        products:  { type: 'array', items: { $ref: '#/components/schemas/OrderProduct' } },
-                        email:     { type: 'string', format: 'email', example: 'john@example.com' },
-                        amount:    { type: 'number', example: 299.98 },
-                        status:    { type: 'string', enum: ['pending', 'processing', 'shipped', 'completed'], example: 'pending' },
+                        _id: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d3' },
+                        orderId: { type: 'string', description: 'Stripe PaymentIntent ID', example: 'pi_3abc123' },
+                        products: { type: 'array', items: { $ref: '#/components/schemas/OrderProduct' } },
+                        email: { type: 'string', format: 'email', example: 'john@example.com' },
+                        amount: { type: 'number', example: 299.98 },
+                        status: { type: 'string', enum: ['pending', 'processing', 'shipped', 'completed'], example: 'pending' },
                         createdAt: { type: 'string', format: 'date-time' },
                         updatedAt: { type: 'string', format: 'date-time' },
                     },
@@ -545,15 +545,15 @@ Error responses follow the same structure with \`"success": false\`.
                     type: 'object',
                     required: ['products'],
                     properties: {
-                        userId:   { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
+                        userId: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
                         products: {
                             type: 'array',
                             items: {
                                 type: 'object',
                                 properties: {
-                                    name:     { type: 'string', example: 'Diamond Earrings' },
-                                    image:    { type: 'string', example: 'https://res.cloudinary.com/...' },
-                                    price:    { type: 'number', example: 149.99 },
+                                    name: { type: 'string', example: 'Diamond Earrings' },
+                                    image: { type: 'string', example: 'https://res.cloudinary.com/...' },
+                                    price: { type: 'number', example: 149.99 },
                                     quantity: { type: 'integer', example: 1 },
                                 },
                             },
@@ -571,10 +571,10 @@ Error responses follow the same structure with \`"success": false\`.
                 Review: {
                     type: 'object',
                     properties: {
-                        _id:       { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d4' },
-                        comment:   { type: 'string', example: 'Absolutely love this product!' },
-                        rating:    { type: 'integer', minimum: 1, maximum: 5, example: 5 },
-                        userId:    { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
+                        _id: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d4' },
+                        comment: { type: 'string', example: 'Absolutely love this product!' },
+                        rating: { type: 'integer', minimum: 1, maximum: 5, example: 5 },
+                        userId: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
                         productId: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d2' },
                         createdAt: { type: 'string', format: 'date-time' },
                         updatedAt: { type: 'string', format: 'date-time' },
@@ -584,9 +584,9 @@ Error responses follow the same structure with \`"success": false\`.
                     type: 'object',
                     required: ['comment', 'rating', 'userId', 'productId'],
                     properties: {
-                        comment:   { type: 'string', example: 'Great quality, fast shipping!' },
-                        rating:    { type: 'integer', minimum: 1, maximum: 5, example: 4 },
-                        userId:    { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
+                        comment: { type: 'string', example: 'Great quality, fast shipping!' },
+                        rating: { type: 'integer', minimum: 1, maximum: 5, example: 4 },
+                        userId: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d1' },
                         productId: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d2' },
                     },
                 },
@@ -595,21 +595,21 @@ Error responses follow the same structure with \`"success": false\`.
                     type: 'object',
                     required: ['name', 'email', 'subject', 'message'],
                     properties: {
-                        name:    { type: 'string', example: 'Jane Smith' },
-                        email:   { type: 'string', format: 'email', example: 'jane@example.com' },
-                        subject: { type: 'string', enum: ['General Inquiry','Order Support','Return & Refund','Product Question','Partnership','Other'], example: 'Order Support' },
+                        name: { type: 'string', example: 'Jane Smith' },
+                        email: { type: 'string', format: 'email', example: 'jane@example.com' },
+                        subject: { type: 'string', enum: ['General Inquiry', 'Order Support', 'Return & Refund', 'Product Question', 'Partnership', 'Other'], example: 'Order Support' },
                         message: { type: 'string', minLength: 10, maxLength: 2000, example: 'I have a question about my recent order...' },
                     },
                 },
                 ContactMessage: {
                     type: 'object',
                     properties: {
-                        _id:       { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d5' },
-                        name:      { type: 'string', example: 'Jane Smith' },
-                        email:     { type: 'string', example: 'jane@example.com' },
-                        subject:   { type: 'string', example: 'Order Support' },
-                        message:   { type: 'string', example: 'I have a question about my recent order...' },
-                        status:    { type: 'string', enum: ['unread', 'read', 'replied'], example: 'unread' },
+                        _id: { type: 'string', example: '64f1a2b3c4d5e6f7a8b9c0d5' },
+                        name: { type: 'string', example: 'Jane Smith' },
+                        email: { type: 'string', example: 'jane@example.com' },
+                        subject: { type: 'string', example: 'Order Support' },
+                        message: { type: 'string', example: 'I have a question about my recent order...' },
+                        status: { type: 'string', enum: ['unread', 'read', 'replied'], example: 'unread' },
                         createdAt: { type: 'string', format: 'date-time' },
                     },
                 },
@@ -626,7 +626,7 @@ Error responses follow the same structure with \`"success": false\`.
                     properties: {
                         success: { type: 'boolean', example: true },
                         message: { type: 'string', example: 'Operation completed successfully' },
-                        data:    { type: 'object' },
+                        data: { type: 'object' },
                     },
                 },
                 ErrorResponse: {
@@ -634,7 +634,7 @@ Error responses follow the same structure with \`"success": false\`.
                     properties: {
                         success: { type: 'boolean', example: false },
                         message: { type: 'string', example: 'Something went wrong' },
-                        error:   { type: 'string', nullable: true, example: 'Detailed error message' },
+                        error: { type: 'string', nullable: true, example: 'Detailed error message' },
                     },
                 },
             },
@@ -670,7 +670,7 @@ const SWAGGER_UI_VERSION = '5.18.2';
 const CDN_BASE = `https://cdn.jsdelivr.net/npm/swagger-ui-dist@${SWAGGER_UI_VERSION}`;
 
 function buildSwaggerHtml(specUrl) {
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -722,17 +722,17 @@ function buildSwaggerHtml(specUrl) {
 }
 
 function setupSwagger(app) {
-  app.get('/api-docs.json', (_req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
-  });
+    app.get('/api-docs.json', (_req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(swaggerSpec);
+    });
 
-  app.get('/api-docs', (_req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.send(buildSwaggerHtml('/api-docs.json'));
-  });
+    app.get('/api-docs', (_req, res) => {
+        res.setHeader('Content-Type', 'text/html');
+        res.send(buildSwaggerHtml('/api-docs.json'));
+    });
 
-  app.get('/api-docs/', (_req, res) => res.redirect('/api-docs'));
+    app.get('/api-docs/', (_req, res) => res.redirect('/api-docs'));
 }
 
 module.exports = { setupSwagger, swaggerSpec };
