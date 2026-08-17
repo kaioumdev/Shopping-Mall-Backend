@@ -98,6 +98,14 @@ app.use(async (req, res, next) => {
   if (mongoose.connection.readyState !== 1) {
     await connectDB();
   }
+  // If still not connected after retry, return a clear 503 so the
+  // client gets a meaningful error instead of a cryptic 500.
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database connection unavailable. Please try again shortly.',
+    });
+  }
   next();
 });
 
