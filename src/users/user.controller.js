@@ -11,8 +11,20 @@ const userRegistration = async (req, res) => {
     await user.save();
     res.status(200).send({ message: "Registration successful!" });
   } catch (error) {
-    console.error("Error resgistering a user ", error);
-    res.status(500).send({ message: "Registration failed!" });
+    // Log the full error so Vercel function logs show the real cause
+    console.error("Error registering user:", {
+      message: error.message,
+      code: error.code,      // e.g. 11000 = duplicate key
+      name: error.name,
+    });
+
+    // Duplicate username or email
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern || {})[0] || 'field';
+      return res.status(409).send({ message: `That ${field} is already taken.` });
+    }
+
+    res.status(500).send({ message: "Registration failed!", error: error.message });
   }
 };
 
@@ -49,8 +61,13 @@ const userLoggedIn = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error Login user ", error);
-    res.status(500).send({ message: "Login failed!" });
+    // Log full error for Vercel function logs
+    console.error("Error logging in user:", {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+    });
+    res.status(500).send({ message: "Login failed!", error: error.message });
   }
 };
 
