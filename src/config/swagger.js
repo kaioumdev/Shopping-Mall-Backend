@@ -344,7 +344,7 @@ function buildSwaggerHtml(specUrl) {
     /* ── Reset & base ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-y: scroll; }
-    body { background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { background: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
     /* ── Topbar ─────────────────────────────────────────────────  */
     .swagger-ui .topbar {
@@ -378,7 +378,7 @@ function buildSwaggerHtml(specUrl) {
     }
 
     /* ── Main container ─────────────────────────────────────────  */
-    .swagger-ui { background: #f8fafc !important; }
+    .swagger-ui { background: #ffffff !important; }
     .swagger-ui .wrapper { max-width: 1100px; padding: 0 24px; }
 
     /* ── Info section ───────────────────────────────────────────  */
@@ -423,7 +423,7 @@ function buildSwaggerHtml(specUrl) {
     .swagger-ui .scheme-container .schemes { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .swagger-ui .scheme-container label { color: #64748b !important; font-size: 0.75rem !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; }
     .swagger-ui select {
-      background: #f8fafc !important;
+      background: #ffffff !important;
       color: #0f172a !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 6px !important;
@@ -496,7 +496,7 @@ function buildSwaggerHtml(specUrl) {
     .swagger-ui .parameter__in,
     .swagger-ui .prop-type { color: #334155 !important; }
     .swagger-ui table tbody tr td { color: #475569 !important; }
-    .swagger-ui table tbody tr:nth-child(odd) { background: #f8fafc !important; }
+    .swagger-ui table tbody tr:nth-child(odd) { background: #f5f5f5 !important; }
     .swagger-ui .response-col_status { color: #16a34a !important; font-weight: 600 !important; }
     .swagger-ui .response-col_description { color: #475569 !important; }
     .swagger-ui .tab li { color: #64748b !important; }
@@ -533,7 +533,7 @@ function buildSwaggerHtml(specUrl) {
     /* ── Inputs / textarea ──────────────────────────────────────  */
     .swagger-ui textarea,
     .swagger-ui .body-param__text {
-      background: #f8fafc !important;
+      background: #ffffff !important;
       color: #0f172a !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 8px !important;
@@ -544,7 +544,7 @@ function buildSwaggerHtml(specUrl) {
     .swagger-ui input[type=password],
     .swagger-ui input[type=email],
     .swagger-ui input[type=file] {
-      background: #f8fafc !important;
+      background: #ffffff !important;
       color: #0f172a !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 6px !important;
@@ -573,7 +573,7 @@ function buildSwaggerHtml(specUrl) {
     .swagger-ui section.models h4 { color: #0f172a !important; }
     .swagger-ui .model-title { color: #334155 !important; }
     .swagger-ui .model { color: #475569 !important; }
-    .swagger-ui .model-box { background: #f8fafc !important; border-radius: 6px !important; }
+    .swagger-ui .model-box { background: #ffffff !important; border-radius: 6px !important; }
     .swagger-ui .prop-type { color: #2563eb !important; }
     .swagger-ui .prop-format { color: #7c3aed !important; }
 

@@ -41,7 +41,7 @@ const userLoggedIn = async (req, res) => {
     if (!isMatch) {
       return res.status(401).send({ message: "Invalid Password!" });
     }
-    const token = await generateToken(user._id);
+    const token = generateToken(user._id, user.role);
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,

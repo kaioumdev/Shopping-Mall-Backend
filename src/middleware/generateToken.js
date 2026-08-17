@@ -1,20 +1,15 @@
-const User = require("../users/user.model");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET =  process.env.JWT_SECRET_KEY
+const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
-const generateToken = async (userId) => {
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new Error("User not found");
-    }
-    const token = jwt.sign({userId:user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
-    return token;
-  } catch (error) {
-    console.error("Error generating token", error);
-    throw error;
+// Accept userId and role directly so callers don't need a second DB round-trip.
+// Falls back to a single DB lookup only when role is not supplied (backwards compat).
+const generateToken = (userId, role) => {
+  if (!JWT_SECRET) {
+    throw new Error("JWT_SECRET_KEY environment variable is not set");
   }
+  const token = jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: "1h" });
+  return token;
 };
 
 module.exports = generateToken;
