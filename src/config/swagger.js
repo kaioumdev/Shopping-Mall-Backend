@@ -83,8 +83,8 @@ Error responses follow the same structure with \`"success": false\`.
             },
         },
         servers: [
-            { url: 'http://localhost:5000', description: 'Local Development Server' },
             { url: 'https://shopping-mall-backend.vercel.app', description: 'Production Server' },
+            { url: 'http://localhost:5000', description: 'Local Development Server' },
         ],
         tags: [
             { name: 'Auth', description: 'User registration, login, logout, and profile management' },
@@ -340,18 +340,178 @@ function buildSwaggerHtml(specUrl) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ShoppingMall API Docs</title>
   <link rel="stylesheet" href="${CDN_BASE}/swagger-ui.css" />
-<style>
+  <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #fafafa; }
+    body { background: #0f172a; }
     html { overflow-y: scroll; }
-    .swagger-ui .topbar { background-color: #1e293b !important; }
-    .swagger-ui .info .title { color: #1e293b; font-size: 2rem; }
-    .swagger-ui .scheme-container { background: #f8fafc; padding: 12px 20px; }
-    .swagger-ui .opblock.opblock-get    .opblock-summary-method { background: #3b82f6; }
-    .swagger-ui .opblock.opblock-post   .opblock-summary-method { background: #22c55e; }
-    .swagger-ui .opblock.opblock-put    .opblock-summary-method { background: #f59e0b; }
-    .swagger-ui .opblock.opblock-delete .opblock-summary-method { background: #ef4444; }
+
+    /* ── Topbar ── */
+    .swagger-ui .topbar {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 0;
+    }
     .swagger-ui .topbar .download-url-wrapper { display: none; }
+    .swagger-ui .topbar-wrapper img { content: url(''); }
+    .swagger-ui .topbar-wrapper::before {
+      content: "ShoppingMall API";
+      color: #f1f5f9;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Main wrapper ── */
+    .swagger-ui { background: #0f172a; }
+    .swagger-ui .wrapper { padding: 0 16px; }
+
+    /* ── Info block ── */
+    .swagger-ui .info { margin: 32px 0 24px; }
+    .swagger-ui .info .title {
+      color: #f1f5f9 !important;
+      font-size: 2.25rem !important;
+      font-weight: 800 !important;
+    }
+    .swagger-ui .info .title small { background: #ed3849; color: #fff; border-radius: 4px; }
+    .swagger-ui .info p,
+    .swagger-ui .info li,
+    .swagger-ui .info table { color: #94a3b8 !important; }
+    .swagger-ui .info a { color: #60a5fa !important; }
+    .swagger-ui .info h2,
+    .swagger-ui .info h3 { color: #e2e8f0 !important; }
+    .swagger-ui .info pre {
+      background: #1e293b !important;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: #7dd3fc !important;
+    }
+
+    /* ── Server selector ── */
+    .swagger-ui .scheme-container {
+      background: #1e293b !important;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      box-shadow: none;
+      padding: 14px 20px;
+    }
+    .swagger-ui .scheme-container label { color: #94a3b8 !important; }
+    .swagger-ui select {
+      background: #0f172a !important;
+      color: #e2e8f0 !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-radius: 6px !important;
+    }
+
+    /* ── Tags / section headers ── */
+    .swagger-ui .opblock-tag {
+      color: #e2e8f0 !important;
+      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+      font-size: 1.1rem !important;
+    }
+    .swagger-ui .opblock-tag:hover { background: rgba(255,255,255,0.02) !important; }
+
+    /* ── Operation blocks ── */
+    .swagger-ui .opblock {
+      border-radius: 10px !important;
+      border: 1px solid rgba(255,255,255,0.07) !important;
+      margin-bottom: 8px !important;
+      background: #1e293b !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    }
+    .swagger-ui .opblock .opblock-summary { border-radius: 10px !important; }
+    .swagger-ui .opblock .opblock-summary-description { color: #94a3b8 !important; }
+    .swagger-ui .opblock .opblock-summary-path { color: #e2e8f0 !important; }
+
+    /* ── Method badges ── */
+    .swagger-ui .opblock.opblock-get    .opblock-summary-method { background: #3b82f6 !important; border-radius: 6px !important; }
+    .swagger-ui .opblock.opblock-post   .opblock-summary-method { background: #22c55e !important; border-radius: 6px !important; }
+    .swagger-ui .opblock.opblock-put    .opblock-summary-method { background: #f59e0b !important; border-radius: 6px !important; }
+    .swagger-ui .opblock.opblock-patch  .opblock-summary-method { background: #a78bfa !important; border-radius: 6px !important; }
+    .swagger-ui .opblock.opblock-delete .opblock-summary-method { background: #ef4444 !important; border-radius: 6px !important; }
+
+    .swagger-ui .opblock.opblock-get    { border-left: 3px solid #3b82f6 !important; }
+    .swagger-ui .opblock.opblock-post   { border-left: 3px solid #22c55e !important; }
+    .swagger-ui .opblock.opblock-put    { border-left: 3px solid #f59e0b !important; }
+    .swagger-ui .opblock.opblock-patch  { border-left: 3px solid #a78bfa !important; }
+    .swagger-ui .opblock.opblock-delete { border-left: 3px solid #ef4444 !important; }
+
+    /* ── Expanded opblock body ── */
+    .swagger-ui .opblock .opblock-body { background: #0f172a !important; border-radius: 0 0 10px 10px !important; }
+    .swagger-ui .opblock-description-wrapper p,
+    .swagger-ui .opblock-external-docs-wrapper p,
+    .swagger-ui .opblock-title_normal p,
+    .swagger-ui table thead tr td,
+    .swagger-ui table thead tr th,
+    .swagger-ui .parameter__name,
+    .swagger-ui .parameter__type,
+    .swagger-ui .parameter__deprecated,
+    .swagger-ui .parameter__in,
+    .swagger-ui .prop-type,
+    .swagger-ui .response-col_status,
+    .swagger-ui .response-col_description { color: #94a3b8 !important; }
+    .swagger-ui .tab li { color: #94a3b8 !important; }
+    .swagger-ui .tab li.active { color: #60a5fa !important; }
+
+    /* ── Execute button ── */
+    .swagger-ui .btn.execute {
+      background: #ed3849 !important;
+      border-color: #ed3849 !important;
+      color: #fff !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+      padding: 8px 20px !important;
+    }
+    .swagger-ui .btn.execute:hover { background: #d23141 !important; }
+    .swagger-ui .btn.cancel {
+      border-color: rgba(255,255,255,0.15) !important;
+      color: #94a3b8 !important;
+      border-radius: 8px !important;
+    }
+    .swagger-ui .btn.authorize {
+      background: transparent !important;
+      border: 1px solid #22c55e !important;
+      color: #22c55e !important;
+      border-radius: 8px !important;
+    }
+    .swagger-ui .btn.authorize svg { fill: #22c55e !important; }
+
+    /* ── Textareas / code areas ── */
+    .swagger-ui textarea,
+    .swagger-ui .body-param__text {
+      background: #1e293b !important;
+      color: #e2e8f0 !important;
+      border: 1px solid rgba(255,255,255,0.10) !important;
+      border-radius: 8px !important;
+    }
+    .swagger-ui input[type=text],
+    .swagger-ui input[type=password],
+    .swagger-ui input[type=email],
+    .swagger-ui input[type=file] {
+      background: #1e293b !important;
+      color: #e2e8f0 !important;
+      border: 1px solid rgba(255,255,255,0.10) !important;
+      border-radius: 6px !important;
+    }
+
+    /* ── Response block ── */
+    .swagger-ui .responses-inner { background: #0f172a !important; }
+    .swagger-ui .response-col_status { color: #4ade80 !important; }
+    .swagger-ui .microlight,
+    .swagger-ui .highlight-code { background: #1e293b !important; border-radius: 6px !important; color: #7dd3fc !important; }
+    .swagger-ui .curl { background: #1e293b !important; color: #7dd3fc !important; }
+    .swagger-ui .request-url { background: #1e293b !important; color: #a5f3fc !important; }
+
+    /* ── Models section ── */
+    .swagger-ui section.models { background: #1e293b !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 10px !important; }
+    .swagger-ui section.models h4 { color: #e2e8f0 !important; }
+    .swagger-ui .model-title { color: #94a3b8 !important; }
+    .swagger-ui .model { color: #94a3b8 !important; }
+    .swagger-ui .model-box { background: #0f172a !important; border-radius: 6px !important; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
 <body>
@@ -360,6 +520,17 @@ function buildSwaggerHtml(specUrl) {
   <script src="${CDN_BASE}/swagger-ui-standalone-preset.js"></script>
   <script>
     window.onload = function () {
+      // Automatically pick the right server based on where the page is loaded from.
+      // If accessed on localhost, default to the local server; otherwise use production.
+      var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      var requestInterceptor = function(request) {
+        // If the request URL still points to localhost but we're on production, swap it
+        if (!isLocal && request.url.includes('localhost:5000')) {
+          request.url = request.url.replace('http://localhost:5000', 'https://shopping-mall-backend.vercel.app');
+        }
+        return request;
+      };
+
       SwaggerUIBundle({
         url: "${specUrl}",
         dom_id: '#swagger-ui',
@@ -371,6 +542,7 @@ function buildSwaggerHtml(specUrl) {
         filter: true,
         tagsSorter: "alpha",
         withCredentials: true,
+        requestInterceptor: requestInterceptor,
       });
     };
   </script>
