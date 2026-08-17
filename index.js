@@ -63,43 +63,49 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ── MongoDB connection (serverless-safe) ───────────────────────────────────
-// mongoose.connection.readyState values: 0 = disconnected, 1 = connected,
-// 2 = connecting, 3 = disconnecting. We only call connect() if we're not
-// already connected or connecting — this avoids duplicate connection
-// attempts when Vercel reuses a warm function instance.
-let isConnecting = false;
+// ── Serverless-safe MongoDB connection ────────────────────────────────────
+// On Vercel, each cold-start runs this module fresh. We keep a module-level
+// promise so concurrent in-flight requests share one connect() call instead
+// of racing to open multiple connections.
+let connectionPromise = null;
 
 async function connectDB() {
-  if (mongoose.connection.readyState === 1 || isConnecting) return;
+  // Already connected — nothing to do.
+  if (mongoose.connection.readyState === 1) return;
 
-  isConnecting = true;
-  try {
-    await mongoose.connect(process.env.UB_URL, {
-      serverSelectionTimeoutMS: 8000, // fail fast instead of hanging ~30s
-      socketTimeoutMS: 20000,
+  // Connection in progress — wait for the existing attempt.
+  if (connectionPromise) return connectionPromise;
+
+  connectionPromise = mongoose
+    .connect(process.env.UB_URL, {
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 30000,
+      // Required for Atlas on Vercel — lets the driver pick the best server
+      // without waiting for all nodes to respond.
+      directConnection: false,
+    })
+    .then(() => {
+      console.log("MongoDB connected successfully!");
+    })
+    .catch((err) => {
+      console.error("MongoDB connection failed:", err.message);
+    })
+    .finally(() => {
+      // Reset so the next request can retry if this attempt failed.
+      connectionPromise = null;
     });
-    console.log("MongoDB connected successfully!");
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-    // Don't throw here — let individual requests fail with a clear 500
-    // via the global error handler above, instead of crashing the whole
-    // serverless function on cold start.
-  } finally {
-    isConnecting = false;
-  }
+
+  return connectionPromise;
 }
 
-// Kick off the connection attempt immediately on module load (cold start),
-// and also before each request in case the connection dropped.
+// Kick off connection on cold start so it's ready before first request.
 connectDB();
 
+// Ensure DB is connected before every request; return 503 if it isn't.
 app.use(async (req, res, next) => {
   if (mongoose.connection.readyState !== 1) {
     await connectDB();
   }
-  // If still not connected after retry, return a clear 503 so the
-  // client gets a meaningful error instead of a cryptic 500.
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({
       success: false,
